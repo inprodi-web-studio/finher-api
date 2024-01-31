@@ -8,7 +8,7 @@ const generateUsers = async (strapi) => {
 
     const { id : CUSTOMER_ROLE } = await strapi.query("plugin::users-permissions.role").findOne({
        where : {
-           name : "customer",
+           name : "super-admin",
        },
     });
 
@@ -21,14 +21,14 @@ const generateUsers = async (strapi) => {
     if ( !mainUser?.id ) {
         await strapi.entityService.create( USER, {
             data : {
-                username  : "customer@inprodi.com.mx",
-                email     : "customer@inprodi.com.mx",
+                username  : "owner@inprodi.com.mx",
+                email     : "owner@inprodi.com.mx",
                 password  : "Asdf123456",
                 confirmed : true,
                 blocked   : false,
                 role      : CUSTOMER_ROLE,
                 name      : "Inprodi",
-                lastName  : "Customer",
+                lastName  : "Owner",
                 phone     : "3399999999",
                 gender    : "male",
                 birthdate : "2000-01-01",

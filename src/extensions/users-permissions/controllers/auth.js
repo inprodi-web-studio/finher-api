@@ -22,7 +22,12 @@ module.exports = (plugin) => {
             password,
         } = data;
 
-        const customer = await findOneByAny(email, USER, "email");
+        const customer = await findOneByAny(email, USER, "email", {
+            fields : "*",
+            populate : {
+                role : true,
+            },
+        });
 
         await plugin.services.validateUserContext(password, customer);
 
@@ -39,6 +44,7 @@ module.exports = (plugin) => {
             phone     : customer.phone,
             gender    : customer.gender,
             birthdate : customer.birthdate,
+            role      : customer.role.name,
         };
     };
 };

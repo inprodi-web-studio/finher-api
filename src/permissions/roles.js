@@ -1,10 +1,10 @@
-const { USER } = require("../constants/models");
+const { USER, INVITATION } = require("../constants/models");
 
 const roles = {
     public : {
         permissions : {
             [USER] : {
-                auth : ["login_Customer", "register_Customer", "validateCode_Customer", "forgotPassword_Customer"],
+                auth : ["login"],
             },
         },
         meta : {
@@ -15,10 +15,20 @@ const roles = {
     "super-admin" : {
         permissions : {
             [USER] : [],
+            [INVITATION] : ["create"],
         },
         meta : {
             type        : "super-admin",
             description : "super-admin",
+        },
+    },
+    "sales" : {
+        permissions : {
+            [USER] : [],
+        },
+        meta : {
+            type        : "sales",
+            description : "sales",
         },
     },
 };
