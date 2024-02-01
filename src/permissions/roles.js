@@ -15,7 +15,7 @@ const roles = {
     "super-admin" : {
         permissions : {
             [USER] : [],
-            [INVITATION] : ["create"],
+            [INVITATION] : ["find", "create", "delete"],
         },
         meta : {
             type        : "super-admin",

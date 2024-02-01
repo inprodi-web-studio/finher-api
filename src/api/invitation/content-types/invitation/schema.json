@@ -4,13 +4,21 @@
   "info": {
     "singularName": "invitation",
     "pluralName": "invitations",
-    "displayName": "Invitation"
+    "displayName": "Invitation",
+    "description": ""
   },
   "options": {
     "draftAndPublish": false
   },
   "pluginOptions": {},
   "attributes": {
+    "role": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "plugin::users-permissions.role",
+      "inversedBy": "users",
+      "configurable": false
+    },
     "uuid": {
       "type": "string"
     },
@@ -18,12 +26,10 @@
       "type": "string",
       "required": true
     },
-    "role": {
+    "invitedBy": {
       "type": "relation",
-      "relation": "manyToOne",
-      "target": "plugin::users-permissions.role",
-      "inversedBy": "users",
-      "configurable": false
+      "relation": "oneToOne",
+      "target": "plugin::users-permissions.user"
     }
   }
 }

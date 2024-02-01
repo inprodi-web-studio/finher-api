@@ -368,17 +368,23 @@ export interface ApiInvitationInvitation extends Schema.CollectionType {
     singularName: 'invitation';
     pluralName: 'invitations';
     displayName: 'Invitation';
+    description: '';
   };
   options: {
     draftAndPublish: false;
   };
   attributes: {
-    uuid: Attribute.String;
-    email: Attribute.String & Attribute.Required;
     role: Attribute.Relation<
       'api::invitation.invitation',
       'manyToOne',
       'plugin::users-permissions.role'
+    >;
+    uuid: Attribute.String;
+    email: Attribute.String & Attribute.Required;
+    invitedBy: Attribute.Relation<
+      'api::invitation.invitation',
+      'oneToOne',
+      'plugin::users-permissions.user'
     >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
