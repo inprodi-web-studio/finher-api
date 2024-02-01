@@ -1,5 +1,6 @@
 "use strict";
 
+const models = require("../../../constants/models");
 const { INVITATION, ROLE } = require("../../../constants/models");
 const { findOneByAny, findMany, findOneByUuid } = require("../../../helpers");
 const checkForDuplicates = require("../../../helpers/checkForDuplicates");
@@ -71,6 +72,15 @@ module.exports = createCoreController( INVITATION, ({ strapi }) => ({
         const { key, value } = data;
 
         const { id } = await findOneByUuid( uuid, INVITATION );
+
+        switch (  ) {
+            case value:
+                
+                break;
+        
+            default:
+                break;
+        }
 
         const updatedInvitation = await strapi.entityService.update( INVITATION, id, {
             data : {
