@@ -1,0 +1,43 @@
+{
+  "kind": "collectionType",
+  "collectionName": "leads",
+  "info": {
+    "singularName": "lead",
+    "pluralName": "leads",
+    "displayName": "Lead",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "uuid": {
+      "type": "string"
+    },
+    "completeName": {
+      "displayName": "Complete Name",
+      "type": "component",
+      "repeatable": false,
+      "component": "contact.complete-name"
+    },
+    "tradeName": {
+      "type": "string"
+    },
+    "email": {
+      "type": "string"
+    },
+    "phone": {
+      "displayName": "Phone",
+      "type": "component",
+      "repeatable": false,
+      "component": "contact.phone"
+    },
+    "mainAddress": {
+      "displayName": "Address",
+      "type": "component",
+      "repeatable": false,
+      "component": "contact.address"
+    }
+  }
+}
