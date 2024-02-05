@@ -368,6 +368,7 @@ export interface ApiContactGroupContactGroup extends Schema.CollectionType {
     singularName: 'contact-group';
     pluralName: 'contact-groups';
     displayName: 'Contact Group';
+    description: '';
   };
   options: {
     draftAndPublish: false;
@@ -377,6 +378,11 @@ export interface ApiContactGroupContactGroup extends Schema.CollectionType {
     icon: Attribute.String;
     color: Attribute.String;
     name: Attribute.String;
+    leads: Attribute.Relation<
+      'api::contact-group.contact-group',
+      'manyToMany',
+      'api::lead.lead'
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<
@@ -453,6 +459,11 @@ export interface ApiLeadLead extends Schema.CollectionType {
     email: Attribute.String;
     phone: Attribute.Component<'contact.phone'>;
     mainAddress: Attribute.Component<'contact.address'>;
+    groups: Attribute.Relation<
+      'api::lead.lead',
+      'manyToMany',
+      'api::contact-group.contact-group'
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<'api::lead.lead', 'oneToOne', 'admin::user'> &

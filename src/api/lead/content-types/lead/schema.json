@@ -38,6 +38,12 @@
       "type": "component",
       "repeatable": false,
       "component": "contact.address"
+    },
+    "groups": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::contact-group.contact-group",
+      "mappedBy": "leads"
     }
   }
 }

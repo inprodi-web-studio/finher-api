@@ -1,9 +1,9 @@
-'use strict';
+"use strict";
 
-/**
- * contact-group service
- */
+const { CONTACT_GROUP } = require("../../../constants/models");
 
-const { createCoreService } = require('@strapi/strapi').factories;
+const { createCoreService } = require("@strapi/strapi").factories;
 
-module.exports = createCoreService('api::contact-group.contact-group');
+module.exports = createCoreService( CONTACT_GROUP, ({ strapi }) => ({
+
+}));

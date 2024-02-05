@@ -4,7 +4,8 @@
   "info": {
     "singularName": "contact-group",
     "pluralName": "contact-groups",
-    "displayName": "Contact Group"
+    "displayName": "Contact Group",
+    "description": ""
   },
   "options": {
     "draftAndPublish": false
@@ -22,6 +23,12 @@
     },
     "name": {
       "type": "string"
+    },
+    "leads": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::lead.lead",
+      "inversedBy": "groups"
     }
   }
 }

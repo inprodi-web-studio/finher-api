@@ -2,7 +2,7 @@
 
 const { uuid } = require("uuidv4");
 
-const { USER, INVITATION } = require("./constants/models");
+const { USER, INVITATION, CONTACT_GROUP } = require("./constants/models");
 
 module.exports = {
   register(/*{ strapi }*/) {},
@@ -12,6 +12,7 @@ module.exports = {
       models : [
         USER,
         INVITATION,
+        CONTACT_GROUP,
       ],
       async beforeCreate( event ) {
         const { data } = event.params;

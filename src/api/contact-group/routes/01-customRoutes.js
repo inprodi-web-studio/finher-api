@@ -18,7 +18,7 @@ module.exports = {
       {
         method  : "PUT",
         path    : "/contacts/groups/:uuid", 
-        handler : "contact-group.keyUpdate",
+        handler : "contact-group.update",
       },
       {
         method  : "DELETE",

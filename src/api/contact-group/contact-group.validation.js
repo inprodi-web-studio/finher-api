@@ -1,7 +1,7 @@
 const { yup, validateYupSchema } = require("../../helpers/validators");
 
 const newGroup = yup.object().shape({
-    name  : yup.string().email().required(),
+    name  : yup.string().required(),
     color : yup.string().required(), 
     icon  : yup.string(),
 }).noUnknown().strict();

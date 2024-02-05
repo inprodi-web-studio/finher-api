@@ -1,4 +1,4 @@
-const { USER, INVITATION } = require("../constants/models");
+const { USER, INVITATION, CONTACT_GROUP } = require("../constants/models");
 
 const roles = {
     public : {
@@ -18,6 +18,7 @@ const roles = {
                 user : ["find", "update", "toggle", "destroy"],
             },
             [INVITATION] : ["find", "create", "keyUpdate", "delete"],
+            [CONTACT_GROUP] : ["find", "create", "update", "delete"],
         },
         meta : {
             type        : "super-admin",

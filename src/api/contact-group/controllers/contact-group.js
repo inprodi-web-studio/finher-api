@@ -2,12 +2,18 @@
 
 const { CONTACT_GROUP } = require("../../../constants/models");
 const { findMany, findOneByUuid } = require("../../../helpers");
-const { validateNewGroup, validateKeyUpdate } = require("../contact-group.validation");
+const checkForDuplicates = require("../../../helpers/checkForDuplicates");
+const { validateNewGroup } = require("../contact-group.validation");
 
 const { createCoreController } = require("@strapi/strapi").factories;
 
 const groupFields = {
     fields : ["uuid", "name", "icon", "color"],
+    populate : {
+        leads : {
+            count : true,
+        },
+    },
 };
 
 module.exports = createCoreController( CONTACT_GROUP, ({ strapi }) => ({
@@ -40,6 +46,12 @@ module.exports = createCoreController( CONTACT_GROUP, ({ strapi }) => ({
 
         await validateNewGroup( data );
 
+        const { name } = data;
+
+        await checkForDuplicates( CONTACT_GROUP, {
+            name,
+        });
+
         const newGroup = await strapi.entityService.create( CONTACT_GROUP, {
             data,
             ...groupFields
@@ -48,20 +60,29 @@ module.exports = createCoreController( CONTACT_GROUP, ({ strapi }) => ({
         return newGroup;
     },
 
-    async keyUpdate( ctx ) {
+    async update( ctx ) {
         const data     = ctx.request.body;
         const { uuid } = ctx.params;
 
-        await validateKeyUpdate( data );
-
-        const { key, value } = data;
+        await validateNewGroup( data );
 
         const { id } = await findOneByUuid( uuid, CONTACT_GROUP );
 
-        return id;
+        const updatedGroup = await strapi.entityService.update( CONTACT_GROUP, id, {
+            data,
+            ...groupFields,
+        });
+
+        return updatedGroup;
     },
 
     async delete( ctx ) {
+        const { uuid } = ctx.params;
 
+        const { id } = await findOneByUuid( uuid, CONTACT_GROUP );
+
+        const deletedGroup = await strapi.entityService.delete( CONTACT_GROUP, id, groupFields );
+
+        return deletedGroup;
     },
 }));
