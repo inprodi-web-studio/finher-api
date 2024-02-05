@@ -73,18 +73,11 @@ module.exports = createCoreController( INVITATION, ({ strapi }) => ({
 
         const { id } = await findOneByUuid( uuid, INVITATION );
 
-        switch (  ) {
-            case value:
-                
-                break;
-        
-            default:
-                break;
-        }
+        const entityId = await strapi.service( INVITATION ).keyFind( key, value );
 
         const updatedInvitation = await strapi.entityService.update( INVITATION, id, {
             data : {
-                [key] : value,
+                [key] : entityId,
             },
             ...invitationFields
         });

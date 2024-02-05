@@ -12,14 +12,14 @@ const generateUsers = async (strapi) => {
        },
     });
 
-    const mainUser = await strapi.query( USER ).findOne({
+    let mainUser = await strapi.query( USER ).findOne({
         where : {
             email : "customer@inprodi.com.mx",
         },
     });
 
     if ( !mainUser?.id ) {
-        await strapi.entityService.create( USER, {
+        mainUser = await strapi.entityService.create( USER, {
             data : {
                 username  : "owner@inprodi.com.mx",
                 email     : "owner@inprodi.com.mx",
@@ -52,6 +52,7 @@ const generateUsers = async (strapi) => {
                 phone     : faker.phone.number(),
                 gender    : faker.helpers.arrayElement(["male", "female", "undefined"]),
                 birthdate : "2000-01-01",
+                invitedBy : mainUser.id,
             },
         });
     });

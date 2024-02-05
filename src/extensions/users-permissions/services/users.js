@@ -1,18 +1,13 @@
-"use strict";
-
-const { INVITATION, ROLE } = require("../../../constants/models");
 const { findOneByAny } = require("../../../helpers");
 const { BadRequestError } = require("../../../helpers/errors");
 
-const { createCoreService } = require("@strapi/strapi").factories;
-
-module.exports = createCoreService( INVITATION, ({ strapi }) => ({
-    async keyFind( key, value ) {
+module.exports = (plugin) => {
+    plugin.services.keyFind = async (key, value) => {
         let entityId;
 
         switch ( key ) {
             case "role":
-                const { id : roleId } = await findOneByAny( value, ROLE, "name" );
+                const { id : roleId } = await findOneByAny( value, "plugin::users-permissions.role", "name" );
 
                 entityId = roleId;
             break;
@@ -22,5 +17,5 @@ module.exports = createCoreService( INVITATION, ({ strapi }) => ({
         }
 
         return entityId;
-    },
-}));
+    };
+};

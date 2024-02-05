@@ -1,6 +1,7 @@
 const {
     ROLE,
     USER,
+    INVITATION,
 } = require("../constants/models");
 const generateRoles = require("./roles");
 const generateUsers = require("./users");
@@ -13,6 +14,7 @@ const generateSeeds = async (strapi) => {
     const contentTypes = [
         USER,
         ROLE,
+        INVITATION,
     ];
 
     for (const contentType of contentTypes) {

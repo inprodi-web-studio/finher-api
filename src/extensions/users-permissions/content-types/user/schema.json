@@ -75,6 +75,20 @@
     },
     "uuid": {
       "type": "string"
+    },
+    "invitedBy": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "plugin::users-permissions.user"
+    },
+    "blockedAt": {
+      "type": "string"
+    },
+    "isDeleted": {
+      "type": "boolean"
+    },
+    "deletedAt": {
+      "type": "string"
     }
   }
 }

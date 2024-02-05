@@ -14,7 +14,9 @@ const roles = {
     },
     "super-admin" : {
         permissions : {
-            [USER] : [],
+            [USER] : {
+                user : ["find", "update", "toggle", "destroy"],
+            },
             [INVITATION] : ["find", "create", "keyUpdate", "delete"],
         },
         meta : {
@@ -24,7 +26,9 @@ const roles = {
     },
     "sales" : {
         permissions : {
-            [USER] : [],
+            [USER] : {
+                user : ["find"],
+            },
         },
         meta : {
             type        : "sales",

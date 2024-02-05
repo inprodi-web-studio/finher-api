@@ -794,6 +794,14 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
     name: Attribute.String & Attribute.Required;
     lastName: Attribute.String & Attribute.Required;
     uuid: Attribute.String;
+    invitedBy: Attribute.Relation<
+      'plugin::users-permissions.user',
+      'oneToOne',
+      'plugin::users-permissions.user'
+    >;
+    blockedAt: Attribute.String;
+    isDeleted: Attribute.Boolean;
+    deletedAt: Attribute.String;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<

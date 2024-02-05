@@ -35,7 +35,12 @@ const updateProfileSchema = yup.object().shape({
     lastName        : yup.string().required("Last name is required"),
     gender          : yup.string().oneOf(["male", "female", "undefined"]).required("Gender is required"),
     birthdate       : yup.string().required("Birthdate is required").matches( /^\d{4}-\d{2}-\d{2}$/, "Birthdate must be a valid date" ),
-})
+});
+
+const keyUpdate = yup.object().shape({
+    key : yup.string().required(),
+    value : yup.string().required(),
+});
 
 module.exports = {
     validateLogin          : validateYupSchema( loginSchema ),
@@ -44,4 +49,5 @@ module.exports = {
     validateForgotPassword : validateYupSchema( forgotPasswordSchema ),
     validateResetPassword  : validateYupSchema( resetPasswordSchema ),
     validateUpdateProfile  : validateYupSchema( updateProfileSchema ),
+    validateKeyUpdate      : validateYupSchema( keyUpdate ),
 };
