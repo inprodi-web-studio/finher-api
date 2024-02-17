@@ -1,0 +1,27 @@
+{
+  "kind": "collectionType",
+  "collectionName": "contact_tags",
+  "info": {
+    "singularName": "contact-tag",
+    "pluralName": "contact-tags",
+    "displayName": "Contact Tag"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "uuid": {
+      "type": "string"
+    },
+    "name": {
+      "type": "string"
+    },
+    "leads": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::lead.lead",
+      "inversedBy": "tags"
+    }
+  }
+}

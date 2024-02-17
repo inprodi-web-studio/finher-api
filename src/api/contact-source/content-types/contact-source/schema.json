@@ -1,10 +1,10 @@
 {
   "kind": "collectionType",
-  "collectionName": "contact_groups",
+  "collectionName": "contact_sources",
   "info": {
-    "singularName": "contact-group",
-    "pluralName": "contact-groups",
-    "displayName": "Contact Group",
+    "singularName": "contact-source",
+    "pluralName": "contact-sources",
+    "displayName": "Contact Source",
     "description": ""
   },
   "options": {
@@ -28,7 +28,7 @@
       "type": "relation",
       "relation": "oneToMany",
       "target": "api::lead.lead",
-      "mappedBy": "group"
+      "mappedBy": "source"
     }
   }
 }

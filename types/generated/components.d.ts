@@ -29,6 +29,20 @@ export interface ContactCompleteName extends Schema.Component {
   };
 }
 
+export interface ContactFiles extends Schema.Component {
+  collectionName: 'components_contact_files';
+  info: {
+    displayName: 'Files';
+  };
+  attributes: {
+    invoiceFront: Attribute.Media;
+    invoiceBack: Attribute.Media;
+    idFront: Attribute.Media;
+    idBack: Attribute.Media;
+    addressProof: Attribute.Media;
+  };
+}
+
 export interface ContactPhone extends Schema.Component {
   collectionName: 'components_contact_phones';
   info: {
@@ -45,6 +59,7 @@ declare module '@strapi/types' {
     export interface Components {
       'contact.address': ContactAddress;
       'contact.complete-name': ContactCompleteName;
+      'contact.files': ContactFiles;
       'contact.phone': ContactPhone;
     }
   }

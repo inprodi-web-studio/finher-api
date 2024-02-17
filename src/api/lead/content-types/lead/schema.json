@@ -39,11 +39,46 @@
       "repeatable": false,
       "component": "contact.address"
     },
-    "groups": {
+    "group": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::contact-group.contact-group",
+      "inversedBy": "leads"
+    },
+    "tags": {
       "type": "relation",
       "relation": "manyToMany",
-      "target": "api::contact-group.contact-group",
+      "target": "api::contact-tag.contact-tag",
       "mappedBy": "leads"
+    },
+    "source": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::contact-source.contact-source",
+      "inversedBy": "leads"
+    },
+    "responsible": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "plugin::users-permissions.user"
+    },
+    "isActive": {
+      "type": "boolean",
+      "default": true
+    },
+    "rating": {
+      "type": "integer",
+      "default": 0
+    },
+    "value": {
+      "type": "decimal",
+      "default": 0
+    },
+    "files": {
+      "displayName": "Files",
+      "type": "component",
+      "repeatable": false,
+      "component": "contact.files"
     }
   }
 }

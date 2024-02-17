@@ -362,117 +362,6 @@ export interface AdminTransferTokenPermission extends Schema.CollectionType {
   };
 }
 
-export interface ApiContactGroupContactGroup extends Schema.CollectionType {
-  collectionName: 'contact_groups';
-  info: {
-    singularName: 'contact-group';
-    pluralName: 'contact-groups';
-    displayName: 'Contact Group';
-    description: '';
-  };
-  options: {
-    draftAndPublish: false;
-  };
-  attributes: {
-    uuid: Attribute.String;
-    icon: Attribute.String;
-    color: Attribute.String;
-    name: Attribute.String;
-    leads: Attribute.Relation<
-      'api::contact-group.contact-group',
-      'manyToMany',
-      'api::lead.lead'
-    >;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'api::contact-group.contact-group',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'api::contact-group.contact-group',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-  };
-}
-
-export interface ApiInvitationInvitation extends Schema.CollectionType {
-  collectionName: 'invitations';
-  info: {
-    singularName: 'invitation';
-    pluralName: 'invitations';
-    displayName: 'Invitation';
-    description: '';
-  };
-  options: {
-    draftAndPublish: false;
-  };
-  attributes: {
-    role: Attribute.Relation<
-      'api::invitation.invitation',
-      'manyToOne',
-      'plugin::users-permissions.role'
-    >;
-    uuid: Attribute.String;
-    email: Attribute.String & Attribute.Required;
-    invitedBy: Attribute.Relation<
-      'api::invitation.invitation',
-      'oneToOne',
-      'plugin::users-permissions.user'
-    >;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'api::invitation.invitation',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'api::invitation.invitation',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-  };
-}
-
-export interface ApiLeadLead extends Schema.CollectionType {
-  collectionName: 'leads';
-  info: {
-    singularName: 'lead';
-    pluralName: 'leads';
-    displayName: 'Lead';
-    description: '';
-  };
-  options: {
-    draftAndPublish: false;
-  };
-  attributes: {
-    uuid: Attribute.String;
-    completeName: Attribute.Component<'contact.complete-name'>;
-    tradeName: Attribute.String;
-    email: Attribute.String;
-    phone: Attribute.Component<'contact.phone'>;
-    mainAddress: Attribute.Component<'contact.address'>;
-    groups: Attribute.Relation<
-      'api::lead.lead',
-      'manyToMany',
-      'api::contact-group.contact-group'
-    >;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<'api::lead.lead', 'oneToOne', 'admin::user'> &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<'api::lead.lead', 'oneToOne', 'admin::user'> &
-      Attribute.Private;
-  };
-}
-
 export interface PluginUploadFile extends Schema.CollectionType {
   collectionName: 'files';
   info: {
@@ -889,6 +778,241 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
   };
 }
 
+export interface ApiContactGroupContactGroup extends Schema.CollectionType {
+  collectionName: 'contact_groups';
+  info: {
+    singularName: 'contact-group';
+    pluralName: 'contact-groups';
+    displayName: 'Contact Group';
+    description: '';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  attributes: {
+    uuid: Attribute.String;
+    icon: Attribute.String;
+    color: Attribute.String;
+    name: Attribute.String;
+    leads: Attribute.Relation<
+      'api::contact-group.contact-group',
+      'oneToMany',
+      'api::lead.lead'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::contact-group.contact-group',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::contact-group.contact-group',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiContactSourceContactSource extends Schema.CollectionType {
+  collectionName: 'contact_sources';
+  info: {
+    singularName: 'contact-source';
+    pluralName: 'contact-sources';
+    displayName: 'Contact Source';
+    description: '';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  attributes: {
+    uuid: Attribute.String;
+    icon: Attribute.String;
+    color: Attribute.String;
+    name: Attribute.String;
+    leads: Attribute.Relation<
+      'api::contact-source.contact-source',
+      'oneToMany',
+      'api::lead.lead'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::contact-source.contact-source',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::contact-source.contact-source',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiContactTagContactTag extends Schema.CollectionType {
+  collectionName: 'contact_tags';
+  info: {
+    singularName: 'contact-tag';
+    pluralName: 'contact-tags';
+    displayName: 'Contact Tag';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  attributes: {
+    uuid: Attribute.String;
+    name: Attribute.String;
+    leads: Attribute.Relation<
+      'api::contact-tag.contact-tag',
+      'manyToMany',
+      'api::lead.lead'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::contact-tag.contact-tag',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::contact-tag.contact-tag',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiInvitationInvitation extends Schema.CollectionType {
+  collectionName: 'invitations';
+  info: {
+    singularName: 'invitation';
+    pluralName: 'invitations';
+    displayName: 'Invitation';
+    description: '';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  attributes: {
+    role: Attribute.Relation<
+      'api::invitation.invitation',
+      'manyToOne',
+      'plugin::users-permissions.role'
+    >;
+    uuid: Attribute.String;
+    email: Attribute.String & Attribute.Required;
+    invitedBy: Attribute.Relation<
+      'api::invitation.invitation',
+      'oneToOne',
+      'plugin::users-permissions.user'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::invitation.invitation',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::invitation.invitation',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiLeadLead extends Schema.CollectionType {
+  collectionName: 'leads';
+  info: {
+    singularName: 'lead';
+    pluralName: 'leads';
+    displayName: 'Lead';
+    description: '';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  attributes: {
+    uuid: Attribute.String;
+    completeName: Attribute.Component<'contact.complete-name'>;
+    tradeName: Attribute.String;
+    email: Attribute.String;
+    phone: Attribute.Component<'contact.phone'>;
+    mainAddress: Attribute.Component<'contact.address'>;
+    group: Attribute.Relation<
+      'api::lead.lead',
+      'manyToOne',
+      'api::contact-group.contact-group'
+    >;
+    tags: Attribute.Relation<
+      'api::lead.lead',
+      'manyToMany',
+      'api::contact-tag.contact-tag'
+    >;
+    source: Attribute.Relation<
+      'api::lead.lead',
+      'manyToOne',
+      'api::contact-source.contact-source'
+    >;
+    responsible: Attribute.Relation<
+      'api::lead.lead',
+      'oneToOne',
+      'plugin::users-permissions.user'
+    >;
+    isActive: Attribute.Boolean & Attribute.DefaultTo<true>;
+    rating: Attribute.Integer & Attribute.DefaultTo<0>;
+    value: Attribute.Decimal & Attribute.DefaultTo<0>;
+    files: Attribute.Component<'contact.files'>;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<'api::lead.lead', 'oneToOne', 'admin::user'> &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<'api::lead.lead', 'oneToOne', 'admin::user'> &
+      Attribute.Private;
+  };
+}
+
+export interface ApiLeadStageLeadStage extends Schema.CollectionType {
+  collectionName: 'lead_stages';
+  info: {
+    singularName: 'lead-stage';
+    pluralName: 'lead-stages';
+    displayName: 'Lead Stage';
+    description: '';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  attributes: {
+    uuid: Attribute.String;
+    name: Attribute.String;
+    order: Attribute.Integer;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::lead-stage.lead-stage',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::lead-stage.lead-stage',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 declare module '@strapi/types' {
   export module Shared {
     export interface ContentTypes {
@@ -899,9 +1023,6 @@ declare module '@strapi/types' {
       'admin::api-token-permission': AdminApiTokenPermission;
       'admin::transfer-token': AdminTransferToken;
       'admin::transfer-token-permission': AdminTransferTokenPermission;
-      'api::contact-group.contact-group': ApiContactGroupContactGroup;
-      'api::invitation.invitation': ApiInvitationInvitation;
-      'api::lead.lead': ApiLeadLead;
       'plugin::upload.file': PluginUploadFile;
       'plugin::upload.folder': PluginUploadFolder;
       'plugin::content-releases.release': PluginContentReleasesRelease;
@@ -910,6 +1031,12 @@ declare module '@strapi/types' {
       'plugin::users-permissions.permission': PluginUsersPermissionsPermission;
       'plugin::users-permissions.role': PluginUsersPermissionsRole;
       'plugin::users-permissions.user': PluginUsersPermissionsUser;
+      'api::contact-group.contact-group': ApiContactGroupContactGroup;
+      'api::contact-source.contact-source': ApiContactSourceContactSource;
+      'api::contact-tag.contact-tag': ApiContactTagContactTag;
+      'api::invitation.invitation': ApiInvitationInvitation;
+      'api::lead.lead': ApiLeadLead;
+      'api::lead-stage.lead-stage': ApiLeadStageLeadStage;
     }
   }
 }
