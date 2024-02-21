@@ -9,11 +9,6 @@ const { createCoreController } = require("@strapi/strapi").factories;
 
 const groupFields = {
     fields : ["uuid", "name", "icon", "color"],
-    populate : {
-        leads : {
-            count : true,
-        },
-    },
 };
 
 module.exports = createCoreController( CONTACT_GROUP, ({ strapi }) => ({
@@ -29,6 +24,8 @@ module.exports = createCoreController( CONTACT_GROUP, ({ strapi }) => ({
         };
 
         const groups = await findMany( CONTACT_GROUP, groupFields, filters );
+
+        await strapi.service( CONTACT_GROUP ).addCounters( groups.data );
 
         return groups;
     },

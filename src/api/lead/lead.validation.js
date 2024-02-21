@@ -22,6 +22,7 @@ const newLead = yup.object().shape({
         state  : yup.string(),
         country: yup.string(),
     }).noUnknown().strict(),
+    value       : yup.number().min(0, "Value cant be a negative number"),
     responsible : yup.string().uuid().nullable(),
     group       : yup.string().uuid().nullable(),
     source      : yup.string().uuid().nullable(),

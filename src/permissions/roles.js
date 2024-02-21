@@ -5,6 +5,7 @@ const roles = {
         permissions : {
             [USER] : {
                 auth : ["login"],
+                user : ["me"],
             },
         },
         meta : {
@@ -15,13 +16,13 @@ const roles = {
     "super-admin" : {
         permissions : {
             [USER] : {
-                user : ["find", "update", "toggle", "destroy"],
+                user : ["find", "update", "toggle", "destroy", "me"],
             },
             [INVITATION]     : ["find", "create", "keyUpdate", "delete"],
             [CONTACT_GROUP]  : ["find", "create", "update", "delete"],
             [CONTACT_SOURCE] : ["find", "create", "update", "delete"],
             [CONTACT_TAG]    : ["find", "create", "update", "delete"],
-            [LEAD]           : ["find", "findOne", "create", "keyUpdate", "update", "uploadFile", "delete"],
+            [LEAD]           : ["find", "findOne", "create", "keyUpdate", "update", "uploadFile", "removeFile", "toggleStatus", "delete"],
         },
         meta : {
             type        : "super-admin",
@@ -31,7 +32,7 @@ const roles = {
     "sales" : {
         permissions : {
             [USER] : {
-                user : ["find"],
+                user : ["find", "me"],
             },
         },
         meta : {

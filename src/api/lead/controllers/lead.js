@@ -28,7 +28,10 @@ const leadFields = {
         },
         tags : {
             fields : ["uuid", "name"],
-        }
+        },
+        files : {
+            populate : "*",
+        },
     }
 };
 
@@ -79,7 +82,7 @@ module.exports = createCoreController( LEAD, ({ strapi }) => ({
     async findOne( ctx ) {
         const { uuid } = ctx.params;
 
-        const lead = await findOneByUuid( uuid, LEAD );
+        const lead = await findOneByUuid( uuid, LEAD, leadFields );
 
         return lead;
     },
@@ -223,11 +226,7 @@ module.exports = createCoreController( LEAD, ({ strapi }) => ({
     async delete( ctx ) {
         const { uuid } = ctx.params;
 
-        const { id, files } = await findOneByUuid( uuid, LEAD, {
-            populate : {
-                files : true,
-            },
-        });
+        const { id, files } = await findOneByUuid( uuid, LEAD, leadFields );
 
         await strapi.service( LEAD ).deleteParallelData( id, files );
 

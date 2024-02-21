@@ -9,6 +9,15 @@ module.exports = ( plugin ) => {
     });
 
     plugin.routes["content-api"].routes.push({
+        method  : "GET",
+        path    : "/me",
+        handler : "user.me",
+        config  : {
+            prefix : "",
+        },
+    });
+
+    plugin.routes["content-api"].routes.push({
         method  : "PUT",
         path    : "/users/:uuid",
         handler : "user.update",

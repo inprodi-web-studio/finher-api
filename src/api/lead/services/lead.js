@@ -135,6 +135,12 @@ module.exports = createCoreService( LEAD, ({ strapi }) => ({
     },
 
     async deleteParallelData( id, files ) {
+        if ( !files ) {
+            return;
+        }
+
+        delete files.id;
+
         const keys = Object.keys( files );
 
         let ids = [];
@@ -142,7 +148,6 @@ module.exports = createCoreService( LEAD, ({ strapi }) => ({
         for ( const key of keys ) {
             if ( !files[key] ) continue;
 
-            // ? Not sure of this id path
             ids.push( files[key].id );
         }
 

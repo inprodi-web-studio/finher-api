@@ -51,6 +51,12 @@ module.exports = (plugin) => {
         return users;
     };
 
+    plugin.controllers.user["me"] = async (ctx) => {
+        const user = ctx.state.user;
+
+        return user;
+    };
+
     plugin.controllers.user["update"] = async (ctx) => {
         const data = ctx.request.body;
         const { id : uuid } = ctx.params;
