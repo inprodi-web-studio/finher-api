@@ -22,7 +22,7 @@ module.exports = {
       },
       {
         method  : "DELETE",
-        path    : "/leads/:uuid/files", 
+        path    : "/leads/:uuid/files/:key", 
         handler : "lead.removeFile",
       },
       {

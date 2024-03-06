@@ -118,18 +118,26 @@ module.exports = createCoreService( LEAD, ({ strapi }) => ({
         const ctx         = strapi.requestContext.get();
         const currentFile = files[ key ];
 
-        if ( currentFile ) {
+        if ( currentFile?.id ) {
             throw new BadRequestError( `${ key } is already being uploaded`, {
                 key  : "lead.alreadyUploaded",
                 path : ctx.request.url,
             });
         }
 
-        const uploadedFile = await strapi.plugins.upload.services.upload.uploadToEntity({
-            id,
-            model : LEAD,
-            field : key
-        }, file );
+        const uploadedFile = await strapi.plugins.upload.services.upload.upload({
+            files : file,
+            data  : {},
+        });
+
+        await strapi.entityService.update( LEAD, id, {
+            data : {
+                files : {
+                    ...files,
+                    [ key ] : uploadedFile[0].id,
+                },
+            },
+        });
 
         return uploadedFile;
     },

@@ -154,8 +154,6 @@ module.exports = createCoreController( LEAD, ({ strapi }) => ({
         return updatedLead;
     }, 
 
-    // ? PATCH api/leads/:uuid/files
-    // TODO: NEED TEST
     async uploadFile( ctx ) {
         const data     = ctx.request.body;
         const { uuid } = ctx.params;
@@ -169,11 +167,7 @@ module.exports = createCoreController( LEAD, ({ strapi }) => ({
             throw new UnprocessableContentError(["File is required"]);
         }
 
-        const lead = await findOneByUuid( uuid, LEAD, {
-            populate : {
-                files : true,
-            },
-        });
+        const lead = await findOneByUuid( uuid, LEAD, leadFields);
 
         const uplodadedFile = await strapi.service( LEAD ).uploadIfAvailable( lead, key, file );
 
@@ -183,14 +177,9 @@ module.exports = createCoreController( LEAD, ({ strapi }) => ({
     // ? DELETE api/leads/:uuid/files
     // TODO: NEED TEST
     async removeFile( ctx ) {
-        const data     = ctx.request.body;
-        const { uuid } = ctx.params;
+        const { uuid, key } = ctx.params;
 
-        await validateFileUpload( data );
-
-        const { key } = data;
-
-        const { id, files } = await findOneByUuid( uuid, LEAD );
+        const { files } = await findOneByUuid( uuid, LEAD, leadFields );
 
         const fileId = files[key].id;
 

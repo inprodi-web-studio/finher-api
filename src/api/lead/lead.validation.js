@@ -9,8 +9,8 @@ const newLead = yup.object().shape({
     tradeName : yup.string(),
     email : yup.string().email().required(),
     phone : yup.object().shape({
-        code  : yup.string().required(),
-        number: yup.string().required(),
+        code  : yup.string().nullable(),
+        number: yup.string().nullable(),
     }).noUnknown().strict(),
     mainAddress : yup.object().shape({
         street : yup.string(),

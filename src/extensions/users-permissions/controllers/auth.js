@@ -11,7 +11,7 @@ const {
     generateToken,
 } = require("../../../helpers");
 
-module.exports = (plugin) => {
+module.exports = (plugin) => {{}
     plugin.controllers.auth["login"] = async (ctx) => {
         const data = ctx.request.body;
 
